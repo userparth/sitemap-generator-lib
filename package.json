@@ -8,9 +8,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/yourusername/sitemap-generator-lib.git"
+		"url": "https://github.com/userparth/sitemap-generator-lib.git"
 	},
-	"author": "Your Name",
+	"author": "Parth Sharma",
 	"license": "MIT",
 	"dependencies": {}
 }
