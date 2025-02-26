@@ -1,0 +1,16 @@
+{
+	"name": "sitemap-generator-lib",
+	"version": "1.0.0",
+	"description": "A domain-agnostic sitemap generator with multiple storage backend support.",
+	"main": "src/index.js",
+	"scripts": {
+		"generate": "node src/cli.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yourusername/sitemap-generator-lib.git"
+	},
+	"author": "Your Name",
+	"license": "MIT",
+	"dependencies": {}
+}
