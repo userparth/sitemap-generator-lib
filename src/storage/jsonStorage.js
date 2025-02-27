@@ -1,10 +1,15 @@
-const fs = require("fs").promises;
+const fs = require("fs");
 const path = require("path");
 
-async function fetchData() {
-	const filePath = path.resolve(__dirname, "../../data.json");
-	const content = await fs.readFile(filePath, "utf8");
-	return JSON.parse(content);
+const filePath = path.resolve(__dirname, "data.json");
+
+if (!fs.existsSync(filePath)) {
+	fs.writeFileSync(filePath, "[]", "utf8"); // Create an empty JSON file
 }
 
-module.exports = { fetchData };
+const loadData = () => JSON.parse(fs.readFileSync(filePath, "utf8"));
+
+const saveData = (data) =>
+	fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+
+module.exports = { loadData, saveData };
