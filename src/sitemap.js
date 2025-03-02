@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-module.exports = class SitemapGenerator {
+class SitemapGenerator {
 	constructor(config) {
 		this.config = config;
 		this.storage = config.storage || "json"; // Default to JSON storage
@@ -68,4 +68,5 @@ module.exports = class SitemapGenerator {
 		fs.writeFileSync(filePath, sitemapContent);
 		console.log(`Sitemap generated at: ${filePath}`);
 	}
-};
+}
+module.exports = SitemapGenerator;

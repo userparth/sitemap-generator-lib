@@ -1,62 +1,117 @@
-# Sitemap Generator Library for Node.js
+# Sitemap Generator Library
 
-## Overview
+## 📌 Overview
 
-Sitemap Generator is a **flexible and reusable Node.js library** designed to generate sitemaps dynamically for any website. It is **domain-agnostic**, highly configurable, and supports multiple storage backends such as **databases, JSON, and CSV**. The library offers both **API** and **CLI** usage, making it a versatile solution for various projects.
+`sitemap-generator-lib` is a simple and efficient Node.js library for generating XML sitemaps. It supports JSON and CSV as data sources and allows flexible configuration.
 
-## Features
+---
 
-- ✅ **Domain-Agnostic** – No hardcoded domain-specific values. Configure URL structures dynamically.
-- ✅ **Configurable API** – Supports user-defined **priorities**, **change frequencies**, and **database queries**.
-- ✅ **Modular Design** – Well-structured code with separate handling for **storage, XML generation, and utilities**.
-- ✅ **Multiple Storage Backends** – Supports **Databases, JSON, and CSV** as data sources.
-- ✅ **NPM Package Ready** – Install via `npm` and use via **CLI** or **API**.
+## 📦 Installation
 
-## Installation
+Install the package via npm:
 
-Install the package using npm:
-
-```bash
+```sh
 npm install sitemap-generator-lib
 ```
 
-## Usage
+---
 
-### 1️⃣ Import & Use in Your Project
+## 🚀 Usage
 
-```javascript
-const { generateSitemap } = require("sitemap-generator-lib");
+### 📥 Importing the Library
 
-generateSitemap({
-  baseUrl: "https://example.com",
-  storage: "db", // Options: "db", "json", "csv"
-  priority: {
-    blog: 0.8,
-    product: 0.9,
-  },
-});
+```js
+const SitemapGenerator = require("sitemap-generator-lib");
 ```
 
-### 2️⃣ CLI Usage
+### 🛠 Basic Example
 
-You can also generate sitemaps using the CLI:
+```js
+const SitemapGenerator = require("sitemap-generator-lib");
 
-```bash
-node cli.js --config=config.json
+const config = {
+	baseUrl: "https://example.com",
+	storage: "json", // Supports "json" or "csv"
+	sitemapPath: "./sitemaps",
+	dataFile: "./data.json", // or "./data.csv"
+};
+
+const generator = new SitemapGenerator(config);
+generator.generateSitemap();
 ```
 
-## Project Structure
+---
+
+## ⚙️ Configuration Options
+
+| Option        | Type   | Description                                      |
+| ------------- | ------ | ------------------------------------------------ |
+| `baseUrl`     | String | The base URL for the sitemap links               |
+| `storage`     | String | Storage type (`json` or `csv`)                   |
+| `sitemapPath` | String | Directory where the sitemap will be saved        |
+| `dataFile`    | String | Path to the JSON or CSV file containing URL data |
+
+---
+
+## 📂 Data File Format
+
+### 📜 JSON Format (`data.json`)
+
+```json
+[
+	{
+		"url": "/page-1",
+		"lastmod": "2024-02-29",
+		"changefreq": "daily",
+		"priority": "0.8"
+	},
+	{
+		"url": "/page-2",
+		"lastmod": "2024-02-28",
+		"changefreq": "weekly",
+		"priority": "0.6"
+	}
+]
+```
+
+### 📄 CSV Format (`data.csv`)
 
 ```
-sitemap-generator-lib/
-├── src/
-│   ├── index.js           # Main entry point
-│   ├── config.js          # Configuration handling
-│   ├── storage/           # Storage backends (DB, JSON, CSV)
-│   ├── utils/             # Helper functions (XML generation, URL formatting)
-│   ├── generators/        # Sitemap generation logic
-├── cli.js                 # CLI support
-├── package.json           # NPM package metadata
-├── README.md              # Documentation
-├── .gitignore             # Ignore unnecessary files
+url,lastmod,changefreq,priority
+/page-1,2024-02-29,daily,0.8
+/page-2,2024-02-28,weekly,0.6
 ```
+
+---
+
+## 📜 Output (Generated `sitemap.xml`)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/page-1</loc>
+    <lastmod>2024-02-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://example.com/page-2</loc>
+    <lastmod>2024-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## 👨‍💻 Author
+
+Developed by **[Your Name]**
