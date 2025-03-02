@@ -1,6 +1,6 @@
 {
 	"name": "sitemap-generator-lib",
-	"version": "0.0.5-alpha",
+	"version": "0.0.6-alpha",
 	"description": "A domain-agnostic sitemap generator with multiple storage backend support.",
 	"main": "src/sitemap.js",
 	"scripts": {
