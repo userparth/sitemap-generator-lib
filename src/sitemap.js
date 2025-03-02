@@ -1,18 +1,13 @@
 const fs = require("fs");
 const path = require("path");
-const { Sequelize } = require("sequelize");
 
-class SitemapGenerator {
+module.exports = class SitemapGenerator {
 	constructor(config) {
 		this.config = config;
 		this.storage = config.storage || "json"; // Default to JSON storage
 		this.baseUrl = config.baseUrl || "https://example.com";
 		this.sitemapPath = config.sitemapPath || "./sitemaps";
 		this.ensureDirectoryExists(this.sitemapPath);
-
-		if (this.storage === "database") {
-			this.initDatabase();
-		}
 	}
 
 	ensureDirectoryExists(dir) {
@@ -26,8 +21,6 @@ class SitemapGenerator {
 			return this.fetchFromJSON();
 		} else if (this.storage === "csv") {
 			return this.fetchFromCSV();
-		} else if (this.storage === "database") {
-			return this.fetchFromDatabase();
 		} else {
 			throw new Error("Unsupported storage backend");
 		}
@@ -56,32 +49,6 @@ class SitemapGenerator {
 			});
 	}
 
-	async initDatabase() {
-		this.sequelize = new Sequelize(
-			this.config.db.database,
-			this.config.db.username,
-			this.config.db.password,
-			{
-				host: this.config.db.host,
-				dialect: this.config.db.dialect,
-				logging: false,
-			}
-		);
-	}
-
-	async fetchFromDatabase() {
-		if (!this.sequelize) {
-			throw new Error("Database connection is not initialized");
-		}
-		const [results] = await this.sequelize.query(this.config.db.query);
-		return results.map((row) => ({
-			url: row.url,
-			lastmod: row.lastmod,
-			changefreq: row.changefreq,
-			priority: row.priority,
-		}));
-	}
-
 	async generateSitemap() {
 		const data = await this.fetchData();
 		const entries = data.map(
@@ -101,6 +68,4 @@ class SitemapGenerator {
 		fs.writeFileSync(filePath, sitemapContent);
 		console.log(`Sitemap generated at: ${filePath}`);
 	}
-}
-
-module.exports = SitemapGenerator;
+};
