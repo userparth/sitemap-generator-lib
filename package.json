@@ -3,9 +3,15 @@
 	"version": "0.0.7-alpha",
 	"description": "A domain-agnostic sitemap generator with multiple storage backend support.",
 	"main": "src/sitemap.js",
-	"scripts": {
-		"generate": "node src/cli.js"
+	"bin": {
+		"sitemap-gen": "./bin/sitemap-cli.js"
 	},
+	"keywords": [
+		"sitemap",
+		"generator",
+		"cli",
+		"library"
+	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/userparth/sitemap-generator-lib.git"
