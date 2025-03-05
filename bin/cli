@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+const { program } = require("commander");
+const { SitemapGenerator } = require("../src/sitemap");
+
+program
+	.version("1.0.0")
+	.description(
+		"A simple CLI for generating XML sitemaps using sitemap-generator-lib"
+	)
+	.requiredOption("-b, --baseUrl <url>", "Base URL for the sitemap")
+	.requiredOption("-s, --storage <type>", "Storage type: json or csv")
+	.option(
+		"-p, --sitemapPath <path>",
+		"Path to save the generated sitemap",
+		"./sitemaps"
+	)
+	.option(
+		"-d, --dataFile <file>",
+		"Path to the data file (JSON/CSV)",
+		"./data.json"
+	)
+	.action((options) => {
+		const config = {
+			baseUrl: options.baseUrl,
+			storage: options.storage,
+			sitemapPath: options.sitemapPath,
+			dataFile: options.dataFile,
+		};
+
+		const generator = new SitemapGenerator(config);
+		generator.generateSitemap();
+		console.log("✅ Sitemap successfully generated!");
+	});
+
+program.parse(process.argv);
