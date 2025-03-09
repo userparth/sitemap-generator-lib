@@ -104,6 +104,10 @@ url,lastmod,changefreq,priority
 </urlset>
 ```
 
+## Contributing
+
+Feel free to contribute by submitting issues or pull requests.
+
 ---
 
 ## 📜 License
