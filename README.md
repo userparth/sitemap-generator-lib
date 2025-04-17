@@ -107,7 +107,6 @@ url,lastmod,changefreq,priority
 ## Contributing
 
 Feel free to contribute by submitting issues or pull requests.
-
 ---
 
 ## 📜 License
